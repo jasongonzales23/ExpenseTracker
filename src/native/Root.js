@@ -1,15 +1,14 @@
 import React, { Component } from 'react'
-//import { connect } from 'react-redux'
+import { connect } from 'react-redux'
 import {
   StyleSheet,
   Text,
   TextInput,
   View
 } from 'react-native'
-//import {
-  //updateExpenseAmount
-//} from '../actions/AppActions'
-
+import {
+  updateExpenseAmount
+} from '../actions/AppActions'
 
 class ExpenseTracker extends Component {
   constructor(props) {
@@ -62,14 +61,12 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ExpenseTracker
+const mapStateToProps = (state) => ({
+  app: state.app
+})
 
-//const mapStateToProps = (state) => ({
-  //app: state.app
-//})
+const mapDispatchToProps = {
+  updateExpenseAmount
+}
 
-//const mapDispatchToProps = {
-  //updateExpenseAmount
-//}
-
-//export default connect(mapStateToProps, mapDispatchToProps)(ExpenseTracker)
+export default connect(mapStateToProps, mapDispatchToProps)(ExpenseTracker)
