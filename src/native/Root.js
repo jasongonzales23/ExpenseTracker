@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {
+  Button,
   StyleSheet,
   Text,
   TextInput,
   View
 } from 'react-native'
 import {
-  updateExpenseAmount
+  submitExpense,
+  updateExpenseAmount,
+  updateExpenseDescription
 } from '../actions/AppActions'
 
 class ExpenseTracker extends Component {
@@ -35,7 +38,14 @@ class ExpenseTracker extends Component {
           placeholder="Amount"
         />
         <TextInput
+          onChangeText={this.props.updateExpenseDescription}
           placeholder="Description"
+        />
+        <Button
+          onPress={submitExpense}
+          title="Submit"
+          color="#841584"
+          accessibilityLabel="Learn more about this purple button"
         />
       </View>
     )
@@ -66,7 +76,9 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-  updateExpenseAmount
+  submitExpense,
+  updateExpenseAmount,
+  updateExpenseDescription
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExpenseTracker)

@@ -13,3 +13,16 @@ export function updateExpenseDescription(text) {
     payload: text
   }
 }
+
+export function submitExpense(expenseObj) {
+  return {
+    type: ActionTypes.SUBMIT_EXPENSE,
+    expenseObj
+  }
+}
+
+export function addExpenseToList(expenseObj) {
+  return {
+    type: ADD_EXPENSE_TO_LIST,
+    expenseObj
+}
