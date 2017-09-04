@@ -24,7 +24,8 @@ class ExpenseTracker extends Component {
   render() {
     const {
       expenseAmount,
-      expenseDescription
+      expenseDescription,
+      submitExpense
     } = this.props
 
     return (

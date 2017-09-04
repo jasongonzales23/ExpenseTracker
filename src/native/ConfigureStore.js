@@ -1,6 +1,7 @@
 import {createStore, applyMiddleware, compose} from 'redux'
 import reducers from '../reducers'
 import thunk from 'redux-thunk'
+import { composeWithDevTools } from 'remote-redux-devtools'
 
 let middleware = [
   thunk,

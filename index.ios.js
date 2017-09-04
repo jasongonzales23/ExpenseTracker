@@ -11,7 +11,6 @@ import {
 } from 'react-native'
 
 export default class ExpenseTracker extends Component {
-
   render() {
     return (
       <Provider store={store}>

@@ -1,28 +1,38 @@
-import { ActionTypes } from './index'
+import { ActionTypes as at} from './index'
 
-export function updateExpenseAmount(text) {
+export function updateExpenseAmount(num) {
   return {
-    type: ActionTypes.UPDATE_EXPENSE_AMOUNT,
-    payload: text
+    type: at.UPDATE_EXPENSE_AMOUNT,
+    num
   }
 }
 
 export function updateExpenseDescription(text) {
   return {
-    type: ActionTypes.UPDATE_EXPENSE_DESCRIPTION,
-    payload: text
-  }
-}
-
-export function submitExpense(expenseObj) {
-  return {
-    type: ActionTypes.SUBMIT_EXPENSE,
-    expenseObj
+    type: at.UPDATE_EXPENSE_DESCRIPTION,
+    text
   }
 }
 
 export function addExpenseToList(expenseObj) {
   return {
-    type: ADD_EXPENSE_TO_LIST,
+    type: at.ADD_EXPENSE_TO_LIST,
     expenseObj
+  }
+}
+
+export const submitExpense = () => {
+  return (dispatch, getState) => {
+    const {
+      expenseAmount,
+      expenseDescription
+    } = getState().AppReducer
+
+    const obj = {
+      amount: expenseAmount,
+      description: expenseDescription,
+    }
+
+    dispatch(addExpenseToList(obj))
+  }
 }
