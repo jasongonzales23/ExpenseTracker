@@ -8,25 +8,29 @@ import {
   View
 } from 'react-native'
 import {
+  computeBalance,
   submitExpense,
   updateExpenseAmount,
   updateExpenseDescription
 } from '../actions/AppActions'
 
 class ExpenseTracker extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   componentDidMount() {
+    this.props.computeBalance()
   }
 
   render() {
     const {
-      expenseAmount,
-      expenseDescription,
+      updateExpenseAmount,
+      updateExpenseDescription,
       submitExpense
     } = this.props
+
+    const {
+      balance,
+      expenseAmount,
+      expenseDescription,
+    } = this.props.AppReducer
 
     return (
       <View style={styles.container}>
@@ -34,12 +38,14 @@ class ExpenseTracker extends Component {
           Add an expense
         </Text>
         <TextInput
+          value={expenseAmount}
           keyboardType={"numeric"}
-          onChangeText={this.props.updateExpenseAmount}
+          onChangeText={updateExpenseAmount}
           placeholder="Amount"
         />
         <TextInput
-          onChangeText={this.props.updateExpenseDescription}
+          value={expenseDescription}
+          onChangeText={updateExpenseDescription}
           placeholder="Description"
         />
         <Button
@@ -48,6 +54,10 @@ class ExpenseTracker extends Component {
           color="#841584"
           accessibilityLabel="Learn more about this purple button"
         />
+
+      <Text style={styles.balance}>
+        Remaining Balance: {balance}
+      </Text>
       </View>
     )
   }
@@ -73,10 +83,11 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => ({
-  app: state.app
+  AppReducer: state.AppReducer
 })
 
 const mapDispatchToProps = {
+  computeBalance,
   submitExpense,
   updateExpenseAmount,
   updateExpenseDescription

@@ -1,6 +1,7 @@
 import { ActionTypes  as at } from '../actions'
 
 const initialState = {
+  balance: null,
   budget: 1200,
   expenseAmount: null,
   expenseDescription: null,
@@ -16,7 +17,10 @@ const ACTION_HANDLERS = {
   ),
   [at.ADD_EXPENSE_TO_LIST]: (state, action) => (
     { ...state, expenses: [...state.expenses, action.expenseObj] }
-  )
+  ),
+  [at.UPDATE_BALANCE]: (state, action) => (
+    { ...state, balance: action.balance }
+  ),
 }
 
 export default function AppReducer(state = initialState, action) {

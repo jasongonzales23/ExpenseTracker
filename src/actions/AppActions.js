@@ -21,6 +21,38 @@ export function addExpenseToList(expenseObj) {
   }
 }
 
+export function updateBalance(balance) {
+  return {
+    type: at.UPDATE_BALANCE,
+    balance
+  }
+}
+
+export const computeBalance = () => {
+  return (dispatch, getState) => {
+    const {
+      balance,
+      budget,
+      expenses
+    } = getState().AppReducer
+
+    const bal = balance ? balance : budget
+    const expenseTotal = expenses.reduce((total, exp) => {
+      return parseInt(exp.amount) + total
+    }, 0)
+
+    const diff = bal - expenseTotal
+    dispatch(updateBalance(diff))
+  }
+}
+
+export const clearInputs = () => {
+  return (dispatch, getState) => {
+    dispatch(updateExpenseAmount(null))
+    dispatch(updateExpenseDescription(null))
+  }
+}
+
 export const submitExpense = () => {
   return (dispatch, getState) => {
     const {
@@ -33,6 +65,8 @@ export const submitExpense = () => {
       description: expenseDescription,
     }
 
+    dispatch(clearInputs())
     dispatch(addExpenseToList(obj))
+    dispatch(computeBalance())
   }
 }
