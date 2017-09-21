@@ -62,6 +62,7 @@ export const submitExpense = () => {
 
     const obj = {
       amount: expenseAmount,
+      date: new Date(),
       description: expenseDescription,
     }
 
